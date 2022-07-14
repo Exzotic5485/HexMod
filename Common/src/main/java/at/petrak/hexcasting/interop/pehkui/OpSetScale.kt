@@ -26,7 +26,7 @@ object OpSetScale : SpellOperator {
 
     private data class Spell(val target: Entity, val scale: Double) : RenderedSpell {
         override fun cast(ctx: CastingContext) {
-            if(target instanceof PlayerEntity) {
+            if(target.isInstance(PlayerEntity)) {
                 return;
             }
             IXplatAbstractions.INSTANCE.pehkuiApi.setScale(target, scale.toFloat())
