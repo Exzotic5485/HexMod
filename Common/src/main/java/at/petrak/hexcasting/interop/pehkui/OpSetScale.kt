@@ -5,6 +5,7 @@ import at.petrak.hexcasting.api.spell.casting.CastingContext
 import at.petrak.hexcasting.xplat.IXplatAbstractions
 import net.minecraft.util.Mth
 import net.minecraft.world.entity.Entity
+import net.minecraft.entity.player.PlayerEntity;
 
 object OpSetScale : SpellOperator {
     override val argc = 2
@@ -25,6 +26,9 @@ object OpSetScale : SpellOperator {
 
     private data class Spell(val target: Entity, val scale: Double) : RenderedSpell {
         override fun cast(ctx: CastingContext) {
+            if(target instanceof PlayerEntity) {
+                return;
+            }
             IXplatAbstractions.INSTANCE.pehkuiApi.setScale(target, scale.toFloat())
         }
     }
